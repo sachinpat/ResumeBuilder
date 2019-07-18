@@ -14,7 +14,7 @@ class DataHolder: NSObject {
     private override init() {
         
     }
-    // MARK: - Save and image
+    // MARK: - Save  image
     func saveImage(imageName: String, image:UIImage){
         //create an instance of the FileManager
         let fileManager = FileManager.default
@@ -27,6 +27,7 @@ class DataHolder: NSObject {
         fileManager.createFile(atPath: imagePath as String, contents: data, attributes: nil)
     }
     
+    // MARK: - Get  image
     func getImage(imageName: String) -> String {
         let fileManager = FileManager.default
         let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(imageName)
@@ -38,3 +39,4 @@ class DataHolder: NSObject {
         return imagePath
     }
 }
+

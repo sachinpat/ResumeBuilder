@@ -9,6 +9,7 @@
 import UIKit
 
 extension PersonalViewController:UIFactoryProtocol {
+    // MARK: Build view from UIFactory
     func buildViews(target:UITapGestureRecognizer) -> [UIView] {
         userImageView =  makeImageView(size: CGSize(width: 200, height: 200), target: target)
         firstName = makeTextField(size: CGSize(width: personalInfoScrollView.frame.width, height: 50), text: "Enter first name", keyboadType: UIKeyboardType.default)
@@ -52,7 +53,7 @@ extension PersonalViewController:UIFactoryProtocol {
             ].flatMap({$0}) as! [UIView]
     }
 }
-//Mark: TextField Delegate methods.
+// MARK: TextField Delegate methods.
 extension PersonalViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         personalInfoScrollView.contentOffset = CGPoint(x: 0, y: 0)
@@ -83,7 +84,7 @@ extension PersonalViewController: UITextFieldDelegate {
         {
             var maxLength = 2 //To restrict only to enter 2 numberss
             if (textField == phoneNumner) {
-                 maxLength = 10 //To restrict only to enter 10 numberss
+                maxLength = 10 //To restrict only to enter 10 numberss
             }
             //To restrict only to enter 10 numberss
             
@@ -101,20 +102,21 @@ extension PersonalViewController: UITextFieldDelegate {
 }
 
 extension PersonalViewController: PersonalViewProtocol {
+    // MARK: load View With Saved or FetchedData
     func loadViewWithSavedorFetchedData(info: PersonalInfo?) {
         if let info = info {
-             firstName?.text = info.firstName
-             lastName?.text = info.lastName
-             phoneNumner?.text = info.phoneNumner
-             emailId?.text = info.emailId
-             addressLine1?.text = info.addressLine1
-             addressLine2?.text = info.addressLine2
-             dateOfBirth?.text = info.dateOfBirth
-             yearOfExperiece?.text = info.yearOfExperiece
-             skillSetWorked?.text = info.skillSetWorked
-             primaryEducationMarks?.text = info.primaryEducationMarks
-             secondaryEducationMarks?.text = info.secondaryEducationMarks
-             higherEducationMarks?.text = info.higherEducationMarks
+            firstName?.text = info.firstName
+            lastName?.text = info.lastName
+            phoneNumner?.text = info.phoneNumner
+            emailId?.text = info.emailId
+            addressLine1?.text = info.addressLine1
+            addressLine2?.text = info.addressLine2
+            dateOfBirth?.text = info.dateOfBirth
+            yearOfExperiece?.text = info.yearOfExperiece
+            skillSetWorked?.text = info.skillSetWorked
+            primaryEducationMarks?.text = info.primaryEducationMarks
+            secondaryEducationMarks?.text = info.secondaryEducationMarks
+            higherEducationMarks?.text = info.higherEducationMarks
             let url = URL(string: info.userImage)
             
             DispatchQueue.global().async {
@@ -133,3 +135,4 @@ extension PersonalViewController: PersonalViewProtocol {
     
     
 }
+

@@ -8,6 +8,8 @@
 
 import UIKit
 
+//This protocol create view dynamically and pass to view
+
 protocol UIFactoryProtocol:UITextFieldDelegate {}
 extension UIFactoryProtocol {
     func makeImageView(size:CGSize, target:UITapGestureRecognizer) -> UIImageView{
@@ -17,7 +19,7 @@ extension UIFactoryProtocol {
         personalImageView.translatesAutoresizingMaskIntoConstraints = false
         personalImageView.heightAnchor.constraint(equalToConstant: size.height).isActive = true
         personalImageView.widthAnchor.constraint(equalToConstant: size.width).isActive = true
-//        personalImageView.leadingAnchor.constraint(equalTo: , constant: <#T##CGFloat#>
+        //        personalImageView.leadingAnchor.constraint(equalTo: , constant: <#T##CGFloat#>
         personalImageView.isUserInteractionEnabled = true
         personalImageView.addGestureRecognizer(target)
         
@@ -31,7 +33,7 @@ extension UIFactoryProtocol {
         return personalImageView
     }
     
-   
+    
     
     func makeTextField(size:CGSize, text:String, keyboadType:UIKeyboardType) -> UITextField {
         let customTextField = UITextField()

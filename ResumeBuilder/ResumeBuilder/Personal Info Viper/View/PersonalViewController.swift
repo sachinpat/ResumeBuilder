@@ -29,7 +29,7 @@ class PersonalViewController: UIViewController {
     var userImageView = UIImageView().self
     var personalModel = PersonalInfo()
     
-    //Mark: View life cycle methods.
+    // MARK: - View life cycle methods.
     override func viewDidLoad() {
         super.viewDidLoad()
         //Set up view intial view
@@ -37,6 +37,7 @@ class PersonalViewController: UIViewController {
         //Configure View from UIView Factory
         configureView()
         if (DataHolder.sharedInstance.fetchSaved == 0 || DataHolder.sharedInstance.fetchSaved == 2) {
+            //Fetch data from Server or Local
             presenterDelegate?.getModelClass()
             DataHolder.sharedInstance.fetchSaved = 1
         }
@@ -57,7 +58,8 @@ class PersonalViewController: UIViewController {
             presenterDelegate?.saveData(info: createPeronalInfoModel())
         }
     }
-    //Mark: Fill Personal Info model class from UI
+    
+    // MARK: - Fill Personal Info model class from UI
     fileprivate func createPeronalInfoModel() -> PersonalInfo {
         personalModel = PersonalInfo()
         if let firstName = firstName?.text {
@@ -102,10 +104,11 @@ class PersonalViewController: UIViewController {
         return personalModel
     }
     
+    // MARK: - Set Up NavigationView
     fileprivate func setUpNavigationView() {
         let saveBarButtonItem = UIBarButtonItem.init(title: "Show", style: .done, target: self, action: #selector(saveSelector))
         self.navigationItem.rightBarButtonItem = saveBarButtonItem
-        self.navigationController?.title = "Personal Info"
+        self.title = "Personal Info"
     }
     
     fileprivate func setUpInitialView() {
@@ -121,6 +124,7 @@ class PersonalViewController: UIViewController {
         setUpStackView()
     }
     
+    // MARK: - Set Up Stack view
     fileprivate func setUpStackView() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         let views = buildViews(target: tapGestureRecognizer)
@@ -164,7 +168,7 @@ class PersonalViewController: UIViewController {
             
         }
     }
-    //Mark:- Alert after incorect data
+    // MARK:- Alert after incorect data
     func showAlert(message:String) {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in

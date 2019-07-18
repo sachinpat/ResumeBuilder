@@ -8,7 +8,7 @@
 
 import UIKit
 
-
+//Personal info Codable model/entity.
 struct PersonalInfo:Codable {
     var firstName = ""
     var lastName = ""

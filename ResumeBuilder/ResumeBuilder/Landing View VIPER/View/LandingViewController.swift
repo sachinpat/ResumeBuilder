@@ -9,7 +9,7 @@
 import UIKit
 
 class LandingViewController: UIViewController {
-
+    
     @IBOutlet weak var catagoryTableView: UITableView!
     let cellId = "indexCell"
     var dashboardOptions = ["Personal Information","Education","Topics of Knowledge","Past Project","Current/latest Company Details","Additional Info"]
@@ -17,10 +17,10 @@ class LandingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.title = "Landing"
+        self.title = "Landing"
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
