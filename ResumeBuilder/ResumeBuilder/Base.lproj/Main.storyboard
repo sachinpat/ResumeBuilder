@@ -23,6 +23,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eqR-fV-pHN">
                                         <rect key="frame" x="0.0" y="0.0" width="206" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="fetch" label="Fetch And Edit Saved Resume"/>
                                         <state key="normal" title="Fetch And Edit Saved Resume"/>
                                         <connections>
                                             <action selector="fetchSaved:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wgJ-56-71z"/>
@@ -30,6 +31,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7np-Ky-QKD">
                                         <rect key="frame" x="0.0" y="50" width="206" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="create"/>
                                         <state key="normal" title="Click To Create Resume"/>
                                         <connections>
                                             <action selector="onNewResumeClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cGA-MM-Jbm"/>
@@ -46,6 +48,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="dha-a5-6l4"/>
+                    <connections>
+                        <outlet property="fetchButton" destination="eqR-fV-pHN" id="pEU-j4-bK9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

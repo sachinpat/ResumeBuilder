@@ -118,6 +118,7 @@ class PersonalViewController: UIViewController {
         personalInfoScrollView.contentSize = CGSize(width: self.view.frame.size.width, height: 1000)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
+        personalInfoScrollView.accessibilityIdentifier = "scrollView"
     }
     
     fileprivate func configureView() {

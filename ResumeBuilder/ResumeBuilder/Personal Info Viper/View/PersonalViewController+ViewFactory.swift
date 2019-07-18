@@ -16,13 +16,13 @@ extension PersonalViewController:UIFactoryProtocol {
         firstName?.delegate = self
         lastName = makeTextField(size: CGSize(width: personalInfoScrollView.frame.width, height: 50), text: "Enter last name", keyboadType: UIKeyboardType.default)
         lastName?.delegate = self
-        phoneNumner = makeTextField(size: CGSize(width: personalInfoScrollView.frame.width, height: 50), text: "Enter phone numner", keyboadType: UIKeyboardType.phonePad)
+        phoneNumner = makeTextField(size: CGSize(width: personalInfoScrollView.frame.width, height: 50), text: "Enter phone number", keyboadType: UIKeyboardType.phonePad)
         phoneNumner?.delegate = self
-        emailId = makeTextField(size: CGSize(width: personalInfoScrollView.frame.width, height: 50), text: "Enter email Id ", keyboadType: UIKeyboardType.emailAddress)
+        emailId = makeTextField(size: CGSize(width: personalInfoScrollView.frame.width, height: 50), text: "Enter email Id", keyboadType: UIKeyboardType.emailAddress)
         emailId?.delegate = self
-        addressLine1 = makeTextField(size: CGSize(width: personalInfoScrollView.frame.width, height: 50), text: "Enter address Line 1 ", keyboadType: UIKeyboardType.default)
+        addressLine1 = makeTextField(size: CGSize(width: personalInfoScrollView.frame.width, height: 50), text: "Enter address Line 1", keyboadType: UIKeyboardType.default)
         addressLine1?.delegate = self
-        addressLine2 = makeTextField(size: CGSize(width: personalInfoScrollView.frame.width, height: 50), text: "Enter address Line 2 ", keyboadType: UIKeyboardType.default)
+        addressLine2 = makeTextField(size: CGSize(width: personalInfoScrollView.frame.width, height: 50), text: "Enter address Line 2", keyboadType: UIKeyboardType.default)
         addressLine2?.delegate = self
         dateOfBirth = makeTextField(size: CGSize(width: personalInfoScrollView.frame.width, height: 50), text: "Enter DOB in dd-mm-yyyy format.", keyboadType: UIKeyboardType.default)
         dateOfBirth?.delegate = self

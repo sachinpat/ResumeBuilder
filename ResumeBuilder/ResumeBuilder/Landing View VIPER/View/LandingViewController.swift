@@ -18,6 +18,7 @@ class LandingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Landing"
+        catagoryTableView.accessibilityIdentifier = "catagoryTableView"
         // Do any additional setup after loading the view.
     }
     

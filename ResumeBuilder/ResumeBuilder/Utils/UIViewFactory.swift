@@ -37,6 +37,7 @@ extension UIFactoryProtocol {
     
     func makeTextField(size:CGSize, text:String, keyboadType:UIKeyboardType) -> UITextField {
         let customTextField = UITextField()
+        customTextField.accessibilityIdentifier = text
         customTextField.placeholder = text
         customTextField.attributedPlaceholder = NSAttributedString(string: text, attributes: [NSAttributedStringKey.foregroundColor:UIColor.darkGray])
         customTextField.keyboardType = keyboadType
