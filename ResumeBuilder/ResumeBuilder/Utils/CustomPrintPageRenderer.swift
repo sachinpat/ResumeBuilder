@@ -29,7 +29,7 @@ class CustomPrintPageRenderer: UIPrintPageRenderer {
     
     override func drawHeaderForPage(at pageIndex: Int, in headerRect: CGRect) {
         // Specify the header text.
-        let headerText: NSString = "Invoice"
+        let headerText: NSString = "Resume"
         
         // Set the desired font.
 //        let font = UIFont(name: "AmericanTypewriter-Bold", size: 30.0)
@@ -45,8 +45,6 @@ class CustomPrintPageRenderer: UIPrintPageRenderer {
             .foregroundColor: UIColor.white,
             .shadow: shadow
         ]
-//        let textAttributes =
-//            [NSAttributedStringKey.font.rawValue: font!, NSAttributedStringKey.foregroundColor: UIColor(red: 243.0/255, green: 82.0/255.0, blue: 30.0/255.0, alpha: 1.0), NSAttributedStringKey.kern: 7.5] as [AnyHashable : Any]
         
         // Calculate the text size.
         let textSize = getTextSize(text: headerText as String, font: nil, textAttributes: attributes)
@@ -66,35 +64,35 @@ class CustomPrintPageRenderer: UIPrintPageRenderer {
     override func drawFooterForPage(at pageIndex: Int, in footerRect: CGRect) {
         let footerText: NSString = "Thank you!"
         
-        let font = UIFont(name: "Noteworthy-Bold", size: 14.0)
-        let textSize = getTextSize(text: footerText as String, font: font!)
+        let customFont = UIFont(name: "Noteworthy-Bold", size: 14.0)
+        let textSize = getTextSize(text: footerText as String, font: customFont )
         
         let centerX = footerRect.size.width/2 - textSize.width/2
         let centerY = footerRect.origin.y + self.footerHeight/2 - textSize.height/2
-        let attributes = [NSAttributedStringKey.font: font!, NSAttributedStringKey.foregroundColor: UIColor(red: 205.0/255.0, green: 205.0/255.0, blue: 205.0/255, alpha: 1.0)]
+        let attributes = [NSAttributedStringKey.font: customFont, NSAttributedStringKey.foregroundColor: UIColor(red: 205.0/255.0, green: 205.0/255.0, blue: 205.0/255, alpha: 1.0)]
         
-        footerText.draw(at: CGPoint(x: centerX, y: centerY), withAttributes: attributes)
+        footerText.draw(at: CGPoint(x: centerX, y: centerY), withAttributes: attributes as Any as? [NSAttributedStringKey : Any] )
         
         
         // Draw a horizontal line.
         let lineOffsetX: CGFloat = 20.0
         let context = UIGraphicsGetCurrentContext()
-        context!.setStrokeColor(red: 205.0/255.0, green: 205.0/255.0, blue: 205.0/255, alpha: 1.0)
-        context!.move(to: CGPoint(x: lineOffsetX, y: footerRect.origin.y))
-        context!.addLine(to: CGPoint(x: footerRect.size.width - lineOffsetX, y: footerRect.origin.y))
-        context!.strokePath()
+        context?.setStrokeColor(red: 205.0/255.0, green: 205.0/255.0, blue: 205.0/255, alpha: 1.0)
+        context?.move(to: CGPoint(x: lineOffsetX, y: footerRect.origin.y))
+        context?.addLine(to: CGPoint(x: footerRect.size.width - lineOffsetX, y: footerRect.origin.y))
+        context?.strokePath()
     }
     
     
     
-    func getTextSize(text: String, font: UIFont!, textAttributes: [NSAttributedStringKey: Any]! = nil) -> CGSize {
+    func getTextSize(text: String, font: UIFont?, textAttributes: [NSAttributedStringKey: Any]? = nil) -> CGSize {
         let testLabel = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: self.paperRect.size.width, height: footerHeight))
         if let attributes = textAttributes {
             testLabel.attributedText = NSAttributedString(string: text, attributes: attributes)
         }
         else {
             testLabel.text = text
-            testLabel.font = font!
+            testLabel.font = font
         }
         
         testLabel.sizeToFit()

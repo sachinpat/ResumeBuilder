@@ -11,18 +11,14 @@ import XCTest
 
 class ResumeBuilderTests: XCTestCase {
     
-    var urlSession: URLSession!
-    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        urlSession = URLSession(configuration: .default)
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-        urlSession = nil
     }
     
     func testExample() {
@@ -64,30 +60,21 @@ class ResumeBuilderTests: XCTestCase {
     
     // Asynchronous test: success fast, failure slow
     func testValidCallToURLGetsHTTPStatusCode200() {
-        // given
-        let url =
-            URL(string: "https://api.jsonbin.io/b/5d27724f0e09805769fec4da/1")
-        // 1
-        let promise = expectation(description: "Status code: 200")
-        
-        // when
-        let dataTask = urlSession.dataTask(with: url!) { data, response, error in
-            // then
-            if let error = error {
-                XCTFail("Error: \(error.localizedDescription)")
-                return
-            } else if let statusCode = (response as? HTTPURLResponse)?.statusCode {
-                if statusCode == 200 {
-                    // 2
-                    promise.fulfill()
-                } else {
-                    XCTFail("Status code: \(statusCode)")
+         let promise = expectation(description: "Status code: 200")
+        let resumeWebServiceHandler = ResumeWebServiceHandler()
+        guard let url = URL.init(string: StringConstant().kURL) else { return }
+        resumeWebServiceHandler.getProfileDataFromServer(url: url, completion:({(data:PersonalInfo?, error:Error?) in
+            if let personaInfo = data {
+                XCTAssertNotNil(personaInfo)
+                promise.fulfill()
+            }else {
+                //No data saved in server
+                if let error = error{
+                    XCTFail("Error: \(error.localizedDescription)")
                 }
-            }
-        }
-        dataTask.resume()
-        // 3
+            }}))
         wait(for: [promise], timeout: 5)
+
     }
     
     func testGetImageFromLocal() {

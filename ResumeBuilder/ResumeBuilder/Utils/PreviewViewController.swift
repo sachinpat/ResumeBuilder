@@ -12,7 +12,7 @@ class PreviewViewController: UIViewController {
     
     var invoiceComposer: InvoiceComposer!
     
-    var HTMLContent: String!
+    var HTMLContent: String?
     
     
     override func viewDidLoad() {
@@ -58,7 +58,7 @@ class PreviewViewController: UIViewController {
     
     // MARK: - Export to PDF
     @objc func exportToPDF() {
-        invoiceComposer.exportHTMLContentToPDF(HTMLContent: HTMLContent)
+        invoiceComposer.exportHTMLContentToPDF(HTMLContent: HTMLContent ?? "")
         showOptionsAlert()
     }
     
@@ -70,7 +70,7 @@ class PreviewViewController: UIViewController {
         if let inviceInfoModel = invoiceInfo {
             if let invoiceHTML = invoiceComposer.renderInvoice(personalInfo: inviceInfoModel) {
                 
-                resumeWebPreview.loadHTMLString(invoiceHTML, baseURL: NSURL(string: invoiceComposer.pathToInvoiceHTMLTemplate!)! as URL)
+                resumeWebPreview.loadHTMLString(invoiceHTML, baseURL: NSURL(string: invoiceComposer.pathToInvoiceHTMLTemplate ?? "") as URL?)
                 HTMLContent = invoiceHTML
             }
         }
@@ -112,7 +112,8 @@ class PreviewViewController: UIViewController {
         if MFMailComposeViewController.canSendMail() {
             let mailComposeViewController = MFMailComposeViewController()
             mailComposeViewController.setSubject("Invoice")
-            mailComposeViewController.addAttachmentData(NSData(contentsOfFile: invoiceComposer.pdfFilename)! as Data, mimeType: "application/pdf", fileName: "Invoice")
+            guard let pdfFilename = invoiceComposer.pdfFilename else { return }
+            mailComposeViewController.addAttachmentData(NSData(contentsOfFile: pdfFilename) as! Data, mimeType: "application/pdf", fileName: "Invoice")
             present(mailComposeViewController, animated: true, completion: nil)
         }
     }

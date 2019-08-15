@@ -10,13 +10,13 @@ import UIKit
 
 class PersonalInteractor: NSObject {
     var presenterDelegate:PersonalPresenterProtocol?
-    let url = "https://api.jsonbin.io/b/5d27724f0e09805769fec4da/1"
+    let url = StringConstant().kURL
     
     //MARK: - Create Profile json file and save
     func saveUploadedFilesSet(fileName:PersonalInfo) {
         do {
             let jsonData = try JSONEncoder().encode(fileName)
-            let jsonString = String(data: jsonData, encoding: .utf8)!
+            let jsonString = String(data: jsonData, encoding: .utf8) ?? ""
             print(jsonString)
             if let path = Bundle.main.path(forResource: "Profile", ofType: ".json") {
                 // and decode it back
@@ -69,7 +69,8 @@ extension PersonalInteractor: PersonalInteractorProtocol {
         }
         //Fetch from server
         let resumeWebServiceHandler = ResumeWebServiceHandler()
-        resumeWebServiceHandler.getProfileDataFromServer(url: URL.init(string: url)!, completion:({[weak self](data:PersonalInfo?, error:Error?) in
+        guard let url = URL.init(string: url) else { return }
+        resumeWebServiceHandler.getProfileDataFromServer(url: url, completion:({[weak self](data:PersonalInfo?, error:Error?) in
             if let personaInfo = data {
                 self?.presenterDelegate?.loadViewWithData(info: personaInfo)
             }else {

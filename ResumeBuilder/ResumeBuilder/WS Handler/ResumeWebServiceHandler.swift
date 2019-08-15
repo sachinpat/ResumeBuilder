@@ -9,7 +9,7 @@
 import UIKit
 
 
-class ResumeWebServiceHandler: NSObject {
+class ResumeWebServiceHandler: NSObject, URLSessionDelegate {
     
     func getProfileDataFromServer(url: URL, completion: @escaping (PersonalInfo?, Error?) -> Void) {
         var urlRequest = URLRequest(url: url)
@@ -17,6 +17,7 @@ class ResumeWebServiceHandler: NSObject {
         
         // set up the session
         let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 60
         let session = URLSession(configuration: config)
         
         // make the request
@@ -24,7 +25,7 @@ class ResumeWebServiceHandler: NSObject {
             (data, response, error) in
             // check for any errors
             guard error == nil else {
-                print(error!)
+                print(error ?? "Error in request")
                 completion(nil,error)
                 return
             }
@@ -39,10 +40,16 @@ class ResumeWebServiceHandler: NSObject {
                 completion(peronalInfoModel, nil)
             } catch {
                 completion(nil,error)
-                print("Error in parsing")
             }
             
         }
         task.resume()
     }
+}
+
+extension ResumeWebServiceHandler {
+    public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
+        //Handle SSL Pinning for authentication challange.
+    }
+        
 }

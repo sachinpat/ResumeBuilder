@@ -42,6 +42,7 @@
 		03C667A722D62E3200A2E26F /* last_item.html in Resources */ = {isa = PBXBuildFile; fileRef = 03C667A522D62E3200A2E26F /* last_item.html */; };
 		03F5FB2722D4DF93009619B9 /* PersonalViewController+ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F5FB2622D4DF93009619B9 /* PersonalViewController+ViewFactory.swift */; };
 		03F5FB2922D4E103009619B9 /* UIViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F5FB2822D4E103009619B9 /* UIViewFactory.swift */; };
+		03FD6E282305BF2B00A42343 /* ConstantFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD6E272305BF2B00A42343 /* ConstantFile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		03C667A522D62E3200A2E26F /* last_item.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = last_item.html; sourceTree = "<group>"; };
 		03F5FB2622D4DF93009619B9 /* PersonalViewController+ViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonalViewController+ViewFactory.swift"; sourceTree = "<group>"; };
 		03F5FB2822D4E103009619B9 /* UIViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewFactory.swift; sourceTree = "<group>"; };
+		03FD6E272305BF2B00A42343 /* ConstantFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantFile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +275,7 @@
 				03C6678522D5BD0600A2E26F /* ImagePickerManager.swift */,
 				03F5FB2822D4E103009619B9 /* UIViewFactory.swift */,
 				03C6679A22D5DBB000A2E26F /* DataHolder.swift */,
+				03FD6E272305BF2B00A42343 /* ConstantFile.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				03BDFE4822D39E5C0038CE5D /* LandingEntity.swift in Sources */,
 				03C6678F22D5D2B700A2E26F /* PersonalInteractor.swift in Sources */,
 				03F5FB2922D4E103009619B9 /* UIViewFactory.swift in Sources */,
+				03FD6E282305BF2B00A42343 /* ConstantFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

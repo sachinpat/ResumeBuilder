@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationController?.navigationBar.backgroundColor = .blue
-        self.title = "Home"
+        self.title = StringConstant().kHome
     }
     
     override func didReceiveMemoryWarning() {

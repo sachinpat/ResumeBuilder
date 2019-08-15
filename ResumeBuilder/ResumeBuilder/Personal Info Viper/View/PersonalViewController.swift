@@ -25,7 +25,8 @@ class PersonalViewController: UIViewController {
     var primaryEducationMarks: UITextField?
     var secondaryEducationMarks: UITextField?
     var higherEducationMarks: UITextField?
-    var datePicker: UIDatePicker!
+    var datePicker = UIDatePicker()
+    var toolBar = UIToolbar()
     var userImageView = UIImageView().self
     var personalModel = PersonalInfo()
     
@@ -36,6 +37,7 @@ class PersonalViewController: UIViewController {
         setUpInitialView()
         //Configure View from UIView Factory
         configureView()
+        personalInfoScrollView.accessibilityIdentifier = "scrollView"
         if (DataHolder.sharedInstance.fetchSaved == 0 || DataHolder.sharedInstance.fetchSaved == 2) {
             //Fetch data from Server or Local
             presenterDelegate?.getModelClass()
@@ -84,7 +86,7 @@ class PersonalViewController: UIViewController {
             personalModel.dateOfBirth = dateOfBirth
         }
         if let _ = userImageView.image {
-            personalModel.userImage = DataHolder.sharedInstance.getImage(imageName: "profile.png")
+            personalModel.userImage = DataHolder.sharedInstance.getImage(imageName: StringConstant().kProfileImage)
         }
         if let yearOfExperiece = yearOfExperiece?.text {
             personalModel.yearOfExperiece = yearOfExperiece
@@ -106,9 +108,9 @@ class PersonalViewController: UIViewController {
     
     // MARK: - Set Up NavigationView
     fileprivate func setUpNavigationView() {
-        let saveBarButtonItem = UIBarButtonItem.init(title: "Show", style: .done, target: self, action: #selector(saveSelector))
+        let saveBarButtonItem = UIBarButtonItem.init(title: StringConstant().kShow, style: .done, target: self, action: #selector(saveSelector))
         self.navigationItem.rightBarButtonItem = saveBarButtonItem
-        self.title = "Personal Info"
+        self.title = StringConstant().kPersonalInformation
     }
     
     fileprivate func setUpInitialView() {
@@ -146,7 +148,7 @@ class PersonalViewController: UIViewController {
         
     }
     
-    // MARK: - Dismiss Keyboard
+    // MARK: - Save data locally.
     @objc func saveSelector() {
         presenterDelegate?.saveData(info: createPeronalInfoModel())
         presenterDelegate?.navigateToPersonal()
@@ -165,7 +167,7 @@ class PersonalViewController: UIViewController {
         ImagePickerManager().pickImage(self) { image in
             //here is the image
             self.userImageView.image = image
-            DataHolder.sharedInstance.saveImage(imageName: "profile.png", image: image)
+            DataHolder.sharedInstance.saveImage(imageName: StringConstant().kProfileImage, image: image)
             
         }
     }
@@ -186,6 +188,33 @@ class PersonalViewController: UIViewController {
                 
             }}))
         self.present(alert, animated: true, completion: nil)
+    }
+    // MARK:- Tool bar button methods
+    @objc func doneClick() {
+        let dateFormatter1 = DateFormatter()
+        dateFormatter1.dateStyle = .medium
+        dateFormatter1.timeStyle = .none
+        //self.datePicker.resignFirstResponder()
+        datePicker.isHidden = true
+        toolBar.isHidden = true
+    }
+    
+     @objc func cancelClick() {
+        datePicker.isHidden = true
+        toolBar.isHidden = true
+    }
+    
+    // MARK:- datePickerValueChanged methods
+    @objc func datePickerValueChanged(_ sender: UIDatePicker) {
+        // Create date formatter
+        let dateFormatter: DateFormatter = DateFormatter()
+        
+        // Set date format
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        
+        // Apply date format
+        let selectedDate: String = dateFormatter.string(from: sender.date)
+        dateOfBirth?.text = selectedDate
     }
     
 }

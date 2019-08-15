@@ -11,6 +11,7 @@ import UIKit
 //This protocol create view dynamically and pass to view
 
 protocol UIFactoryProtocol:UITextFieldDelegate {}
+
 extension UIFactoryProtocol {
     func makeImageView(size:CGSize, target:UITapGestureRecognizer) -> UIImageView{
         let personalImageView = UIImageView()
@@ -32,9 +33,7 @@ extension UIFactoryProtocol {
         
         return personalImageView
     }
-    
-    
-    
+   
     func makeTextField(size:CGSize, text:String, keyboadType:UIKeyboardType) -> UITextField {
         let customTextField = UITextField()
         customTextField.accessibilityIdentifier = text
@@ -47,6 +46,26 @@ extension UIFactoryProtocol {
         customTextField.heightAnchor.constraint(equalToConstant: size.height).isActive = true
         customTextField.widthAnchor.constraint(equalToConstant: size.width).isActive = true
         return customTextField
+    }
+    
+    func makeDatePicker(view:UIView) -> UIDatePicker {
+        let datePicker = UIDatePicker()
+        datePicker.frame = CGRect(x: 0, y: view.frame.size.height - 200, width: view.frame.size.width, height: 200)
+        datePicker.backgroundColor = UIColor.white
+        datePicker.datePickerMode = UIDatePickerMode.date
+        datePicker.maximumDate = Date()
+        return datePicker
+    }
+    
+    func makeToolBar(view:UIView) -> UIToolbar {
+        // ToolBar
+        let toolBar = UIToolbar()
+        toolBar.frame = CGRect(x: 0, y: view.frame.size.height - 240, width: view.frame.size.width, height: 40)
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
+        toolBar.sizeToFit()
+        return toolBar
     }
 }
 
